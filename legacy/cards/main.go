@@ -5,14 +5,14 @@ import "fmt"
 var cards deck
 
 func main() {
-	cards = append(cards, newCard())
-	cards = append(cards, "Six of Hearts")
-	cards = append(cards, "Five of Spades")
-	fmt.Println(cards)
+	cards = newDeck()
+	hand, remainingDeck, _ := deal(cards, 5)
 
-	cards.print()
-}
+	fmt.Println("Hand:")
+	hand.print()
+	fmt.Println("----")
 
-func newCard() string {
-	return "Ace of Diamonds"
+	fmt.Println("Remaining deck:")
+	remainingDeck.print()
+	fmt.Println("----")
 }
