@@ -42,19 +42,19 @@ func TestSaveToFileAndNewDeckFromFile(t *testing.T) {
 	dLen := len(d)
 	newDLen := len(newD)
 	if newDLen != dLen {
-		t.Errorf("Expected new deck size to match og deck size of %v, got %v", dLen, newDLen)
+		t.Errorf("Expected new deck size to match original deck size of %v, got %v", dLen, newDLen)
 	}
 
 	dFirst := d[0]
 	newDFirst := newD[0]
 	if newDFirst != dFirst {
-		t.Errorf("Expected first card of new deck match og deck first card of %v, got %v", dFirst, newDFirst)
+		t.Errorf("Expected first card of new deck match original deck first card of %v, got %v", dFirst, newDFirst)
 	}
 
 	dLast := d[dLen-1]
 	newDLast := newD[newDLen-1]
 	if newDLast != dLast {
-		t.Errorf("Expected last card of new deck match og deck last card of %v, got %v", dLast, newDLast)
+		t.Errorf("Expected last card of new deck match original deck last card of %v, got %v", dLast, newDLast)
 	}
 
 	err = os.Remove(testFilename)

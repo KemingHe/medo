@@ -9,6 +9,7 @@ import (
 )
 
 type deck []string
+
 const sep = ","
 
 // newDeck creates a new, standard 52-card deck.
@@ -69,7 +70,16 @@ func newDeckFromFile(filename string) deck {
 // shuffle modifies the deck in place by shuffling the cards.
 func (d deck) shuffle() {
 	for i := range d {
-		j := rand.Intn(len(d) -1)
+		j := rand.Intn(len(d) - 1)
+		d[i], d[j] = d[j], d[i]
+	}
+}
+
+// shuffleWithFY modifies the deck in place my shuffling the cards using Fisher–Yates algorithm to ensure unifrom distribution
+func (d deck) shuffleWithFY() {
+	for i := range d {
+		// Generates a random index j such that i <= j < len(d)
+		j := rand.Intn(len(d)-i) + i
 		d[i], d[j] = d[j], d[i]
 	}
 }
