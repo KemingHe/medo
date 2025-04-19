@@ -73,7 +73,7 @@ Using `_` tells the Go compiler you've acknowledged the variable/value but don't
 Go is statically typed. Uninitialized variables get a "zero value".
 
 | Type | Example | Zero Value | Description |
-| :-- | :-- | :-- | :-- |
+| :--- | :--- | :--- | :--- |
 | `bool` | `true` | `false` | Boolean |
 | `string` | `"Hi"` | `""` | UTF-8 text |
 | `int` | `10` | `0` | Signed integer (32/64b, platform-dep.) |
