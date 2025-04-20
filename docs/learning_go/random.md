@@ -13,14 +13,14 @@ Go's `math/rand` package provides pseudo-random number generation.
 package main
 
 import (
-  "fmt"
-  "math/rand" // Uses global generator
+    "fmt"
+    "math/rand" // Uses global generator
 )
 
 func main() {
-  // Go 1.20+: Different output each run without explicit seeding
-  fmt.Println(rand.Intn(100))
-  fmt.Println(rand.Intn(100))
+    // Go 1.20+: Different output each run without explicit seeding
+    fmt.Println(rand.Intn(100))
+    fmt.Println(rand.Intn(100))
 }
 
 ```
@@ -59,21 +59,21 @@ Despite automatic seeding of the global source, you might still use `rand.Seed` 
 > package main
 > 
 > import (
->   "crypto/rand"
->   "encoding/base64"
->   "fmt"
+>     "crypto/rand"
+>     "encoding/base64"
+>     "fmt"
 > )
 > 
 > func main() {
->   // Generate 16 cryptographically secure random bytes
->   b := make([]byte, 16)
->   _, err := rand.Read(b)
->   if err != nil {
->     panic(err) // Handle errors appropriately in real applications
->   }
+>     // Generate 16 cryptographically secure random bytes
+>     b := make([]byte, 16)
+>     _, err := rand.Read(b)
+>     if err != nil {
+>         panic(err) // Handle errors appropriately in real applications
+>     }
 > 
->   // Often encoded for use (e.g., Base64 for tokens)
->   token := base64.URLEncoding.EncodeToString(b)
->   fmt.Println("Secure Token:", token)
+>     // Often encoded for use (e.g., Base64 for tokens)
+>     token := base64.URLEncoding.EncodeToString(b)
+>     fmt.Println("Secure Token:", token)
 > }
 > ```

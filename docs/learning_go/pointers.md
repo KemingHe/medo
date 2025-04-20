@@ -43,14 +43,14 @@ Go is strictly **pass-by-value**. When a pointer is passed to a function, a **co
 
 ```go
 func increment(ptr *int) {
-  // Dereference the pointer copy to modify the original value
-  *ptr = *ptr + 1
+    // Dereference the pointer copy to modify the original value
+    *ptr = *ptr + 1
 }
 
 func main() {
-  count := 5
-  increment(&count) // Pass the address of count
-  fmt.Println(count) // Output: 6
+    count := 5
+    increment(&count) // Pass the address of count
+    fmt.Println(count) // Output: 6
 }
 ```
 
@@ -62,32 +62,32 @@ Pointers are frequently used with structs, especially with methods.
 
 ```go
 type Point struct {
-  X, Y int
+    X, Y int
 }
 
 // Value Receiver: Operates on a *copy* of the Point.
 // Cannot modify the original Point.
 func (pt Point) Info() string {
-  return fmt.Sprintf("X=%d, Y=%d", pt.X, pt.Y)
+    return fmt.Sprintf("X=%d, Y=%d", pt.X, pt.Y)
 }
 
 // Pointer Receiver: Operates on the *original* Point via its address.
 // Can modify the original Point.
 func (pt *Point) Move(dx, dy int) {
-  pt.X += dx // Go automatically dereferences pt (*pt).X
-  pt.Y += dy // Go automatically dereferences pt (*pt).Y
+    pt.X += dx // Go automatically dereferences pt (*pt).X
+    pt.Y += dy // Go automatically dereferences pt (*pt).Y
 }
 
 func main() {
-  p1 := Point{X: 1, Y: 2}
+    p1 := Point{X: 1, Y: 2}
 
-  // Calling a Pointer Receiver Method:
-  // Go provides a shortcut: you can call pointer receiver methods
-  // directly on values. Go automatically passes the address (&p1).
-  p1.Move(10, 20) 
-  // Equivalent to (&p1).Move(10, 20)
+    // Calling a Pointer Receiver Method:
+    // Go provides a shortcut: you can call pointer receiver methods
+    // directly on values. Go automatically passes the address (&p1).
+    p1.Move(10, 20) 
+    // Equivalent to (&p1).Move(10, 20)
 
-  fmt.Println(p1.Info()) // Output: X=11, Y=22
+    fmt.Println(p1.Info()) // Output: X=11, Y=22
 }
 
 ```
@@ -115,7 +115,7 @@ The key difference is what gets copied when passed to a function.
 ```go
 // Example with string (value type)
 func modifyString(s string) {
-  s = "modified in function"
+    s = "modified in function"
 }
 
 originalStr := "original"
@@ -124,7 +124,7 @@ fmt.Println(originalStr) // Output: original
 
 // Example with pointer to string
 func modifyStringPtr(ps *string) {
-  *ps = "modified via pointer"
+    *ps = "modified via pointer"
 }
 
 originalStrPtr := "original"
@@ -141,9 +141,9 @@ fmt.Println(originalStrPtr) // Output: modified via pointer
 ```go
 // Example with slice (reference type)
 func modifySlice(sl []int) {
-  if len(sl) > 0 {
-    sl[0] = 99 // Modifies the underlying array
-  }
+    if len(sl) > 0 {
+      sl[0] = 99 // Modifies the underlying array
+    }
 }
 
 originalSlice := []int{1, 2, 3}
@@ -152,8 +152,8 @@ fmt.Println(originalSlice) // Output: [99 2 3]
 
 // Example with map (reference type)
 func modifyMap(m map[string]int) {
-  m["existing"] = 100 // Modifies the underlying map data
-  m["new"] = 200
+    m["existing"] = 100 // Modifies the underlying map data
+    m["new"] = 200
 }
 
 originalMap := map[string]int{"existing": 1}
@@ -175,7 +175,7 @@ The zero value for any pointer type is `nil`. It indicates the pointer doesn't p
 ```go
 var p *int // p is nil
 if p != nil {
-  fmt.Println(*p) // Safe: only dereference if not nil
+    fmt.Println(*p) // Safe: only dereference if not nil
 }
 // fmt.Println(*p) // PANIC: runtime error: invalid memory address or nil pointer dereference
 ```

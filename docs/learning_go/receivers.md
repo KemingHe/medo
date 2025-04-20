@@ -9,20 +9,20 @@ type MyType string
 
 // Method with receiver 'm' of type 'MyType'
 func (m MyType) Print() { // Value receiver (operates on copy)
-  println(m)
+    println(m)
 }
 
 // Method with pointer receiver
 func (m *MyType) Update(newVal string) { // Pointer receiver (operates on original)
-  *m = MyType(newVal)
+    *m = MyType(newVal)
 }
 
 func main() {
-  var val MyType = "Hello"
-  val.Print() // Calls Print method on val
+    var val MyType = "Hello"
+    val.Print() // Calls Print method on val
 
-  val.Update("World") // Go automatically uses (&val).Update("World")
-  val.Print()         // Prints "World"
+    val.Update("World") // Go automatically uses (&val).Update("World")
+    val.Print()         // Prints "World"
 }
 ```
 
@@ -46,8 +46,8 @@ func main() {
   > type deck []string
   >
   > func deal(d deck, handSize int) (deck, deck, error) {
-  >   // ... validation ...
-  >   return d[:handSize], d[handSize:], nil // Returns slices, doesn't modify original d
+  >     // ... validation ...
+  >     return d[:handSize], d[handSize:], nil // Returns slices, doesn't modify original d
   > }
   > ```
   >

@@ -31,16 +31,16 @@ import "math/rand"
 // shuffleWithFY shuffles the deck in place using the Fisher-Yates algorithm.
 // Ensures a uniform random permutation.
 func (d deck) shuffleWithFY() {
-  n := len(d)
-  // Iterate backwards from the last element down to the second element.
-  // Or iterate forwards from the first element up to the second-to-last.
-  // Both are valid implementations of Fisher-Yates. This example iterates forwards.
-  for i := 0; i < n-1; i++ {
-    // Choose random index j from the remaining unshuffled portion (i to n-1)
-    j := rand.Intn(n-i) + i // j is in the range [i, n-1]
-    // Swap element i with element j
-    d[i], d[j] = d[j], d[i]
-  }
+    n := len(d)
+    // Iterate backwards from the last element down to the second element.
+    // Or iterate forwards from the first element up to the second-to-last.
+    // Both are valid implementations of Fisher-Yates. This example iterates forwards.
+    for i := 0; i < n-1; i++ {
+        // Choose random index j from the remaining unshuffled portion (i to n-1)
+        j := rand.Intn(n-i) + i // j is in the range [i, n-1]
+        // Swap element i with element j
+        d[i], d[j] = d[j], d[i]
+    }
 }
 ```
 
@@ -51,13 +51,13 @@ A frequent mistake is to choose the random index `j` from the *entire* range `[0
 ```go
 // shuffleNaive attempts to shuffle but introduces bias. (DO NOT USE)
 func (d deck) shuffleNaive() {
-  n := len(d)
-  for i := range d {
-    // Incorrect: samples j from [0, n-1] instead of [i, n-1]
-    // Or even worse, [0, n-2] as shown in the original example.
-    j := rand.Intn(n) // Or rand.Intn(n-1) - both are biased!
-    d[i], d[j] = d[j], d[i]
-  }
+    n := len(d)
+    for i := range d {
+        // Incorrect: samples j from [0, n-1] instead of [i, n-1]
+        // Or even worse, [0, n-2] as shown in the original example.
+        j := rand.Intn(n) // Or rand.Intn(n-1) - both are biased!
+        d[i], d[j] = d[j], d[i]
+    }
 }
 ```
 
@@ -73,9 +73,9 @@ import "math/rand"
 // shuffleWithStdLib shuffles the deck using the standard library's `rand.Shuffle`.
 // This is the recommended approach.
 func (d deck) shuffleWithStdLib() {
-  rand.Shuffle(len(d), func(i, j int) {
-    d[i], d[j] = d[j], d[i]
-  })
+    rand.Shuffle(len(d), func(i, j int) {
+        d[i], d[j] = d[j], d[i]
+    })
 }
 ```
 
