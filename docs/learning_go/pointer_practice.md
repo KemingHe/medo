@@ -10,20 +10,20 @@ package main
 import "fmt"
 
 func main() {
-  name := "bill"
+    name := "bill"
 
-  // namePointer holds the memory address of 'name'
-  namePointer := &name
+    // namePointer holds the memory address of 'name'
+    namePointer := &name
 
-  // Print the memory address *of the pointer variable itself* in main
-  fmt.Println(&namePointer)
-  printPointer(namePointer)
+    // Print the memory address *of the pointer variable itself* in main
+    fmt.Println(&namePointer)
+    printPointer(namePointer)
 }
 
 // printPointer receives a *copy* of the pointer
 func printPointer(namePointer *string) {
-  // Print the memory address *of the function's copy* of the pointer variable
-  fmt.Println(&namePointer)
+    // Print the memory address *of the function's copy* of the pointer variable
+    fmt.Println(&namePointer)
 }
 ```
 
