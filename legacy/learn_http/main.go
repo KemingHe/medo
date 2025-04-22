@@ -12,9 +12,9 @@ type logWriter struct{}
 // main makes an http request to a given site and prints response body to console.
 func main() {
 	site := "https://www.example.com"
-	res, getErr := http.Get(site)
-	if getErr != nil {
-		fmt.Printf("Error making GET request to %v: %v\n", site, getErr)
+	res, err := http.Get(site)
+	if err != nil {
+		fmt.Printf("Error making GET request to %v: %v\n", site, err)
 		os.Exit(1)
 	}
 	// Defer ensures Body.Close() executes when the function returns, regardless of how it exits
@@ -24,9 +24,9 @@ func main() {
 
 	// Solution 1:
 	// Use the more efficient io.ReadAll instead of res.Body.Read to avoid fixed buffer and EOF issues
-	// body, readErr := io.ReadAll(res.Body)
-	// if readErr != nil {
-	// 	fmt.Printf("Error reading response body: %v\n", readErr)
+	// body, err := io.ReadAll(res.Body)
+	// if err != nil {
+	// 	fmt.Printf("Error reading response body: %v\n", err)
 	// 	os.Exit(1)
 	// }
 
@@ -35,9 +35,9 @@ func main() {
 
 	// Solution 2:
 	// Alternatively, directly use the os.Stdout Writer to print res.Body Reader to console
-	// copyCount, writeErr := io.Copy(os.Stdout, res.Body)
-	// if writeErr != nil {
-	// 	fmt.Printf("Error writing res body to console: %v\n", writeErr)
+	// copyCount, err := io.Copy(os.Stdout, res.Body)
+	// if err != nil {
+	// 	fmt.Printf("Error writing res body to console: %v\n", err)
 	// 	os.Exit(1)
 	// }
 	// fmt.Printf("Copied %v bytes from res.Body to console\n", copyCount)
@@ -45,7 +45,11 @@ func main() {
 	// Solution 3:
 	// Practice using custom Writer
 	lwPtr := &logWriter{}
-	logLen, _ := io.Copy(lwPtr, res.Body) // Error will always be nil, ignored
+	logLen, err := io.Copy(lwPtr, res.Body)
+	if err != nil {
+		fmt.Println("Error copying response body content to stdout: ", err)
+		os.Exit(1)
+	}
 	fmt.Printf("Printed %v bytes of data from response\n", logLen)
 }
 
