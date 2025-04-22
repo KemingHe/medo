@@ -18,9 +18,7 @@ type square struct {
 	sideLength float64
 }
 
-// This is wrong: func (s shape) printArea...
-
-func printShapeArea(s shape) {
+func printShapeArea(s shape) { // go interface cannot have receiver functions, using regular function instead
 	area := s.getArea()
 
 	// Use type switch to determine the type name
