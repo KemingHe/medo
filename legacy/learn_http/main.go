@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-// main makes http request to google.com and prints response body to console.
+// main makes an http request to a given site and prints response body to console.
 func main() {
 	site := "https://www.example.com"
 	res, getErr := http.Get(site)
