@@ -20,7 +20,7 @@ func main() {
 	// Placing defer immediately after response validation ensures cleanup occurs on all code paths
 	defer res.Body.Close()
 
-	// Use the more efficient io.ReadAll instead of res.Body.Read to avoid fix buffer and EOF issues
+	// Use the more efficient io.ReadAll instead of res.Body.Read to avoid fixed buffer and EOF issues
 	body, readErr := io.ReadAll(res.Body)
 	if readErr != nil {
 		fmt.Printf("Error reading response body: %v\n", readErr)
