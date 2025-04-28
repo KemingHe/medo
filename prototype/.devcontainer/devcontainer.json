@@ -1,0 +1,61 @@
+{
+  // Name of the development container for easy identification
+  "name": "Python 3",
+
+  // Base image - using official Microsoft Python image with Python 3.12
+  // This provides a consistent environment for all developers
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+
+  // Features extend the container with additional tools and capabilities
+  // Here we add the UV package manager for faster dependency management
+  "features": {
+    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
+  },
+
+  // Network configuration
+  // Uncomment to expose specific ports from the container to your local machine
+  // Useful for web applications, APIs, or services running in the container
+  // "forwardPorts": [8000],
+
+  // Initialization and setup
+  // Commands that run after container creation to prepare the development environment
+  // This ensures dependencies from pyproject.toml are installed automatically
+  "postCreateCommand": "uv venv && . .venv/bin/activate && if [ -f 'pyproject.toml' ]; then uv pip install .; fi",
+  
+  // Environment variables
+  "containerEnv": {
+    "UV_LINK_MODE": "copy"
+  },
+
+  // Editor and development tool customizations
+  // These settings ensure a consistent experience across all developer machines
+  "customizations": {
+    "vscode": {
+      // Essential extensions for Python development
+      "extensions": [
+        "ms-python.python", // Core Python language support
+        "ms-python.vscode-pylance" // Enhanced language server for better intellisense
+      ],
+
+      // Python development environment settings
+      "settings": {
+        // Point to the container's Python interpreter to ensure consistency
+        "python.defaultInterpreterPath": ".venv/bin/python",
+
+        // Enable code quality tools to maintain high standards
+        "python.linting.enabled": true,
+
+        // Use Black formatter for consistent code style across the project
+        "python.formatting.provider": "black",
+
+        // Auto-format on save to maintain consistent code style without manual effort
+        "editor.formatOnSave": true
+      }
+    }
+  }
+
+  // User permissions configuration
+  // By default, we run as a non-root user for better security
+  // Uncomment to run as root (not recommended unless specifically needed)
+  // "remoteUser": "root"
+}
