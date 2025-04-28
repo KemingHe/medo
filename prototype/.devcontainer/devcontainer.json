@@ -1,34 +1,29 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-  // Name of the development container for easy identification
   "name": "Python 3",
-
-  // Base image - using official Microsoft Python image with Python 3.12
-  // This provides a consistent environment for all developers
+  
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
-
-  // Features extend the container with additional tools and capabilities
-  // Here we add the UV package manager for faster dependency management
+  
+  // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
-    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}
+    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}, // uv for fast Python dep and project management
+    "ghcr.io/wxw-matt/devcontainer-features/command_runner:0": {} // command_runner for shell commands, i.e. bash
   },
 
-  // Network configuration
-  // Uncomment to expose specific ports from the container to your local machine
-  // Useful for web applications, APIs, or services running in the container
-  // "forwardPorts": [8000],
-
-  // Initialization and setup
-  // Commands that run after container creation to prepare the development environment
-  // This ensures dependencies from pyproject.toml are installed automatically
-  "postCreateCommand": "uv venv && . .venv/bin/activate && if [ -f 'pyproject.toml' ]; then uv pip install .; fi",
-  
   // Environment variables
   "containerEnv": {
-    "UV_LINK_MODE": "copy"
+    "UV_LINK_MODE": "copy" // to prevent uv link warning in a devcontainer env when installing deps
   },
+  
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
 
-  // Editor and development tool customizations
-  // These settings ensure a consistent experience across all developer machines
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "bash -c 'uv venv && source .venv/bin/activate && uv pip install .'",
+  
+  // Configure tool-specific properties.
   "customizations": {
     "vscode": {
       // Essential extensions for Python development
@@ -53,9 +48,6 @@
       }
     }
   }
-
-  // User permissions configuration
-  // By default, we run as a non-root user for better security
-  // Uncomment to run as root (not recommended unless specifically needed)
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 }
