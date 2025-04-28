@@ -1,0 +1,53 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+  "name": "Python 3",
+  
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/jsburckhardt/devcontainer-features/uv:1": {}, // uv for fast Python dep and project management
+    "ghcr.io/wxw-matt/devcontainer-features/command_runner:0": {} // command_runner for shell commands, i.e. bash
+  },
+
+  // Environment variables
+  "containerEnv": {
+    "UV_LINK_MODE": "copy" // to prevent uv link warning in a devcontainer env when installing deps
+  },
+  
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "bash -c 'uv venv && source .venv/bin/activate && uv pip install .'",
+  
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      // Essential extensions for Python development
+      "extensions": [
+        "ms-python.python", // Core Python language support
+        "ms-python.vscode-pylance" // Enhanced language server for better intellisense
+      ],
+
+      // Python development environment settings
+      "settings": {
+        // Point to the container's Python interpreter to ensure consistency
+        "python.defaultInterpreterPath": ".venv/bin/python",
+
+        // Enable code quality tools to maintain high standards
+        "python.linting.enabled": true,
+
+        // Use Black formatter for consistent code style across the project
+        "python.formatting.provider": "black",
+
+        // Auto-format on save to maintain consistent code style without manual effort
+        "editor.formatOnSave": true
+      }
+    }
+  }
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}
