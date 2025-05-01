@@ -4,6 +4,14 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [ {
+      "source": "/",
+      "run": {
+        "serviceId": "medo-prototype",
+        "region": "us-central1",
+        "pinTag": true 
+      }
+    } ]
   }
 }
