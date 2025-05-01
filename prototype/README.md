@@ -1,9 +1,9 @@
 # MEDO Prototype
 
-This prototpy is:
+This prototype is:
 
 - Built with Google Agent Development Kit
-- Contiainerized with Docker
+- Containerized with Docker
 - Deployed to Google Cloud Run via Terraform
 - Custom domain managed by Firebase Hosting
 
