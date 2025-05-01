@@ -37,9 +37,9 @@ The system is built using a modular agent-based architecture powered by Google's
 2. Set up Python environment:
 
     ```shell
-    uv venv
+    uv venv  # Creates a virtual environment using uv (https://github.com/astral-sh/uv)
     source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-    uv pip install --editable .
+    uv pip install --editable .  # Installs dependencies in editable mode
     ```
 
 3. Run locally:
