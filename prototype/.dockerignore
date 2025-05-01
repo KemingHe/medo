@@ -8,6 +8,9 @@
 docs/
 README.md
 
+# GCP
+cloudbuild.yaml
+
 # Credentials
 .env
 .env.example
