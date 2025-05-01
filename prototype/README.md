@@ -1,5 +1,12 @@
 # MEDO Prototype
 
+This prototpy is:
+
+- Built with Google Agent Development Kit
+- Contiainerized with Docker
+- Deployed to Google Cloud Run via Terraform
+- Custom domain managed by Firebase Hosting
+
 ## 🔍 Implementation Decisions
 
 After evaluating several options for building the NL2SQL solution for our multi-cloud data orchestration tool, we decided to implement a native LangGraph-based approach. This decision was based on the following considerations:
