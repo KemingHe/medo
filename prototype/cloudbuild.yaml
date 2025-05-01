@@ -2,12 +2,33 @@
 # This file tells Google Cloud Build how to build and deploy our Docker container
 
 steps:
-  # Use the official Docker builder to build our container image
+  # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    # Specify Dockerfile path (-f) and build context because we're in a monorepo
-    # The prototype/ directory contains both the Dockerfile and application code
-    args: ['build', '-t', 'gcr.io/medo-458502/github.com/keminghe/medo:$COMMIT_SHA', '-f', 'prototype/Dockerfile', 'prototype']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/medo-prototype:$COMMIT_SHA', '-f', 'prototype/Dockerfile', 'prototype']
     env: ['DOCKER_BUILDKIT=1']
+  
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/medo-prototype:$COMMIT_SHA']
+  
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'medo-prototype'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/medo-prototype:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+# Store images in Artifact Registry
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/medo-prototype:$COMMIT_SHA'
 
 options:
   # Only use Cloud Logging to avoid excessive log output and missing bucket error
