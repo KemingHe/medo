@@ -4,12 +4,12 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_IMAGE_URL}:$COMMIT_SHA', '-f', 'prototype/Dockerfile', 'prototype']
+    args: ['build', '-t', '${_IMAGE_URL}', '-f', 'prototype/Dockerfile', 'prototype']
     env: ['DOCKER_BUILDKIT=1']
   
   # Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', '${_IMAGE_URL}:$COMMIT_SHA']
+    args: ['push', '${_IMAGE_URL}']
   
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -19,7 +19,7 @@ steps:
       - 'deploy'
       - 'medo-prototype'
       - '--image'
-      - '${_IMAGE_URL}:$COMMIT_SHA'
+      - '${_IMAGE_URL}'
       - '--region'
       - 'us-central1'
       - '--platform'
@@ -28,11 +28,11 @@ steps:
 
 # Store images in Artifact Registry
 images:
-  - '${_IMAGE_URL}:$COMMIT_SHA'
+  - '${_IMAGE_URL}'
 
 options:
   # Only use Cloud Logging to avoid excessive log output and missing bucket error
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
-  _IMAGE_URL: us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/medo-prototype
+  _IMAGE_URL: us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/medo-prototype:${COMMIT_SHA}
