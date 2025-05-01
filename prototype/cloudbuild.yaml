@@ -7,6 +7,7 @@ steps:
     # Specify Dockerfile path (-f) and build context because we're in a monorepo
     # The prototype/ directory contains both the Dockerfile and application code
     args: ['build', '-t', 'gcr.io/medo-458502/github.com/keminghe/medo:$COMMIT_SHA', '-f', 'prototype/Dockerfile', 'prototype']
+    env: ['DOCKER_BUILDKIT=1']
 
 options:
   # Only use Cloud Logging to avoid excessive log output and missing bucket error
