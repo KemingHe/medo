@@ -1,0 +1,36 @@
+# Git VCS
+.git
+
+# VSCode devcontainer
+.devcontainer
+
+# Documentation
+docs/
+README.md
+
+# Credentials
+.env
+.env.example
+
+# Firebase
+.firebaserc
+firebase.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+.venv/
+.uv/
+
+dist/
+build/
+*.egg-info/
+
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+.ipynb_checkpoints/
