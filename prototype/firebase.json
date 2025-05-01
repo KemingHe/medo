@@ -6,7 +6,7 @@
       "**/node_modules/**"
     ],
     "rewrites": [ {
-      "source": "/",
+      "source": "**",
       "run": {
         "serviceId": "medo-prototype",
         "region": "us-central1",
