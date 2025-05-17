@@ -1,0 +1,38 @@
+---
+config:
+      theme: redux
+---
+flowchart TD
+        USER(["User"])
+        MEDO(["MEDO"])
+        SESSION_DATA_TOOL["Session Data Tool"]
+        SESSION_DATA_STORE[("Session Data Store")]
+
+        SILO_AGENT1(["Data Silo Agent 1"])
+        SILO_AGENT1_TOOL1["NL2SQL Query Tool"]
+        SILO_AGENT1_TOOL1_DB[("SQL Database")]
+
+        SILO_AGENTX(["Data Silo Agent X"])
+        SILO_AGENTX_TOOL1["Query Tool"]
+        SILO_AGENTX_TOOL1_DB[("Database")]
+
+        DATA_SCI_AGENT(["Data Science Agent"])
+        DATA_SCI_AGENT_TOOL1["NL2Py Tool"]
+        DATA_SCI_AGENT_TOOL1_INTER["Py Interpreter"]
+
+        USER -->|"Query + Auth"| MEDO
+        MEDO -->|"Factual, tracible inference"|USER
+        MEDO ---|"Auth check, log lineage"| SILO_AGENT1
+        MEDO ---|"Auth check, log lineage"| SILO_AGENTX
+        MEDO ---|"Log lineage"| DATA_SCI_AGENT
+        MEDO ---|"Log lineage"| SESSION_DATA_TOOL
+        SESSION_DATA_TOOL --- SESSION_DATA_STORE
+
+        SILO_AGENT1 --- SILO_AGENT1_TOOL1
+        SILO_AGENT1_TOOL1 --- SILO_AGENT1_TOOL1_DB
+
+        SILO_AGENTX --- SILO_AGENTX_TOOL1
+        SILO_AGENTX_TOOL1 --- SILO_AGENTX_TOOL1_DB
+
+        DATA_SCI_AGENT --- DATA_SCI_AGENT_TOOL1
+        DATA_SCI_AGENT_TOOL1 --- DATA_SCI_AGENT_TOOL1_INTER
