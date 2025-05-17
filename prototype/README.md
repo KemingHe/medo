@@ -39,13 +39,13 @@ The system is built using a modular agent-based architecture powered by Google's
     ```shell
     uv venv  # Creates a virtual environment using uv (https://github.com/astral-sh/uv)
     source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-    uv pip install --editable .  # Installs dependencies in editable mode
+    uv pip install -r pyproject.toml  # Installs dependencies in editable mode
     ```
 
 3. Run locally:
 
     ```shell
-    adk web
+    uv run adk web
     ```
 
 ### Deployment
@@ -66,20 +66,21 @@ The project uses [Cloud Build](cloudbuild.yaml) for automated CI/CD:
 
 - Expand SQL database connectivity options
 - Add support for more cloud providers
-- Enhance agent capabilities with LangGraph
+- Enhance agent capabilities with Google ADK
 
 ## 📋 Technical Notes
 
 ### Implementation Decisions
 
-After evaluating several options for building the NL2SQL solution for our multi-cloud data orchestration tool, we decided to implement a native LangGraph-based approach. This decision was based on the following considerations:
+After evaluating several options for building the NL2SQL solution for our multi-cloud data orchestration tool, we decided to implement a native Google ADK-based approach. This decision was based on the following considerations:
 
 - Initial attempts with `vanna.ai` encountered multiple compatibility issues:
   - Main dependency incompatibility with Mac ARM64 architecture
   - Sub-dependency incompatibility with Linux when using `devcontainer`
   - Google Colab workaround wouldn't transfer well to web app demonstration
 
-- LangChain/LangGraph was selected as the preferred solution because:
-  - More mature and platform-agnostic ecosystem
+- Google ADK was selected as the preferred solution because:
+  - More debug and visual tracing features
+  - Well-integrates with GCP's Vertex AI ecosystem
   - Allows us to simplify by removing non-essential `vanna`-specific NL2SQL features
   - Provides better long-term maintainability without future migration concerns
