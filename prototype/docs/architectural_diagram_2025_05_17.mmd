@@ -21,7 +21,7 @@ flowchart TD
         DATA_SCI_AGENT_TOOL1_INTER["Py Interpreter"]
 
         USER -->|"Query + Auth"| MEDO
-        MEDO -->|"Factual, tracible inference"|USER
+        MEDO -->|"Factual, traceable inference"|USER
         MEDO ---|"Auth check, log lineage"| SILO_AGENT1
         MEDO ---|"Auth check, log lineage"| SILO_AGENTX
         MEDO ---|"Log lineage"| DATA_SCI_AGENT
